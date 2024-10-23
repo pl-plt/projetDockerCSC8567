@@ -1,0 +1,18 @@
+FROM python:3.8-alpine
+
+WORKDIR /app
+
+COPY ./marche_stp/ /app/marche_stp/
+COPY ./requirements.txt /app/
+
+RUN apk update && apk add --no-cache \
+    gcc \
+    musl-dev \
+    #libffi-dev \
+    && pip install --upgrade pip
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD ["python", "./marche_stp/manage.py", "runserver"]

@@ -1,0 +1,51 @@
+# Créez ici votre docker compose
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+  api:
+    build:
+      context: ./django-site  
+      dockerfile: Dockerfile.api  # Dockerfile for API
+    volumes:
+      - ./django-site:/code  
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+    environment:
+      - DEBUG=True
+      - DJANGO_DB_NAME=db
+      - DJANGO_DB_USER=admin
+      - DJANGO_DB_PASSWORD=admin
+      - DJANGO_DB_HOST=db
+
+  front:
+    build:
+      context: ./django-site  # Ensure this path exists and points to your front-end files
+      dockerfile: Dockerfile.front  # Dockerfile for front-end
+    volumes:
+      - ./django-site:/usr/share/nginx/html  # Adjust this according to where your front-end files go
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+
+volumes:
+  postgres_data:
+
+networks:
+  mynetwork:

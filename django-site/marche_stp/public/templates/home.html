@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+    <nav>
+        <ul class="box">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main class="box">
+        <h2>Home</h2>
+        <p>Welcome to my website. This is the home page.</p>
+        <button id="clickme"><a>Click me</a></button>
+    </main>
+<script src="{% static 'js/utils.js' %}"></script>
+</body>
+</html>
