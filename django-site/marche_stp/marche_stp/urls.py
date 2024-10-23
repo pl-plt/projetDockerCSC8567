@@ -20,5 +20,5 @@ import api.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('public.urls')),
-    path('contact/', api.views.contact_view, name='contact'),
+    path('contact/', api.views.contact_list_view, name='contact'),
 ]

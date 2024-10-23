@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"></style>
+</head>
+<body>
+    <button id="back" onclick="window.location.href='/'">Back</button>
+    <h1>Formulaire</h1>
+    <form class="box" action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button id="submit">Submit</button>
+    </form>
+</body>
+</html>
